@@ -1,18 +1,34 @@
 {
   "name": "co-ui",
-  "version": "1.0.0",
+  "version": "0.0.0-development",
   "description": "",
   "main": "index.js",
+  "engines": {
+    "node": ">=14.17.6",
+    "yarn": ">=1.22.11"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "semantic-release": "semantic-release",
+    "prepare": "husky install",
+    "commit": "cz",
+    "lint:css:prettier": "prettier \"**/*.css\"  --ignore-path .gitignore  --write",
+    "lint:css:stylelint": "stylelint \"**/*.css\" --ignore-path .gitignore  --fix",
+    "lint:css": "run-s lint:css:stylelint lint:css:prettier",
+    "lint:js:fix": "eslint --cache --ignore-path .gitignore \"src/**/*.{js,jsx,ts,tsx,json}\" --fix",
+    "lint:js:prettier": "prettier --ignore-path .gitignore \"src/**/*.{js,jsx,ts,tsx,json}\" --write",
+    "lint:js": "run-s lint:js:fix lint:js:prettier",
+    "lint": "run-p lint:js  lint:css"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@babel/core": "^7.15.5",
+    "@commitlint/cli": "^13.1.0",
+    "@commitlint/config-conventional": "^13.1.0",
     "@storybook/addon-actions": "^6.3.8",
     "@storybook/addon-essentials": "^6.3.8",
     "@storybook/addon-links": "^6.3.8",
@@ -21,19 +37,51 @@
     "@typescript-eslint/eslint-plugin": "^4.31.2",
     "@typescript-eslint/parser": "^4.31.2",
     "babel-loader": "^8.2.2",
+    "cz-conventional-changelog": "3.3.0",
     "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
     "eslint-config-standard": "^16.0.3",
     "eslint-plugin-import": "^2.24.2",
     "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-promise": "^5.1.0",
     "eslint-plugin-react": "^7.26.0",
+    "husky": "^7.0.2",
+    "lint-staged": "^11.1.2",
+    "npm-run-all": "^4.1.5",
     "prettier": "^2.4.1",
+    "semantic-release": "^18.0.0",
+    "stylelint": "^13.13.1",
+    "stylelint-config-idiomatic-order": "^8.1.0",
+    "stylelint-config-standard": "^22.0.0",
+    "stylelint-order": "^4.1.0",
     "typescript": "^4.4.3",
     "typescript-plugin-css-modules": "^3.4.0"
   },
   "peerDependencies": {
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Marcos-Coca/co-ui.git"
+  },
+  "stylelint": {
+    "extends": [
+      "stylelint-config-standard",
+      "stylelint-config-idiomatic-order"
+    ]
+  },
+  "prettier": {
+    "printWidth": 140
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }

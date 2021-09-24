@@ -37,3 +37,7 @@ storybook-static/
 .history
 .ionide
 
+
+package-lock.json
+
+.eslintcache
